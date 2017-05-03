@@ -2,8 +2,11 @@
 import math
 import argparse
 
+
 def next_power_of_2(x):
+
     return int(math.pow(2, math.ceil(math.log2(x))))
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("size", type=int, help="size of a texture. power of 2")
@@ -18,4 +21,3 @@ for i in range(power_of_2_size):
     c = math.cos(r)
     s = math.sin(r)
     print('{0:.8f} {1:.8f}'.format(c, s))
-
