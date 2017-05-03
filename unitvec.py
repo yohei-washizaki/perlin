@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
 import math
 import argparse
-
-
-def next_power_of_2(x):
-
-    return int(math.pow(2, math.ceil(math.log2(x))))
-
+import util
 
 parser = argparse.ArgumentParser()
 parser.add_argument("size", type=int, help="size of a texture. power of 2")
 args = parser.parse_args()
 
-power_of_2_size = next_power_of_2(args.size)
+power_of_2_size = util.next_power_of_2(args.size)
 print(power_of_2_size)
 
 for i in range(power_of_2_size):
