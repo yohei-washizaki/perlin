@@ -15,4 +15,4 @@ for h in range(args.size):
     for w in range(args.size):
         u = w / args.size
         v = h / args.size
-        print('{0} {1}'.format(u , v))
+        print('{0} {1}'.format(u, v))
