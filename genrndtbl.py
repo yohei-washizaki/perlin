@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
-
-import argparse
 import random
 
-parser = argparse.ArgumentParser()
-parser.add_argument("length", type=int, help="length of a table")
-parser.add_argument("-s", "--seed", type=int, help="random seed")
-args = parser.parse_args()
 
-random.seed(args.seed)
+def generate_random_table(length, seed):
+    random.seed(seed)
 
-x = []
-for i in range(args.length):
-    x.append(i)
+    x = []
+    for i in range(length):
+        x.append(i)
+    random.shuffle(x)
+    return x
 
-random.shuffle(x)
 
-for i in x:
-    print(i)
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("length", type=int, help="length of a table")
+    parser.add_argument("-s", "--seed", type=int, help="random seed")
+    args = parser.parse_args()
+
+    x = generate_random_table(args.length, args.seed)
+
+    for i in x:
+        print(i)
