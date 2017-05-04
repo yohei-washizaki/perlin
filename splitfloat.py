@@ -15,4 +15,4 @@ if __name__ == "__main__":
         xy = s.split(' ')
         x = split_float(xy[0])
         y = split_float(xy[1])
-        print('{0[0]} {1[0]} {0[1]:.8f} {1[1]:.8f}'.format(x, y))
+        print('{0[0]} {1[0]} {0[1]} {1[1]}'.format(x, y))
