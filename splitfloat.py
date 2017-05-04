@@ -9,7 +9,7 @@ def split_float(x):
 
 if __name__ == "__main__":
     import sys
-    
+
     for line in sys.stdin:
         s = line.strip()
         xy = s.split(' ')

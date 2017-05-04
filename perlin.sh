@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 SIZE=256
-SEED=114514
+SEED=9999
 SCALE=2
 
 RANDOM_TABLE=$(
