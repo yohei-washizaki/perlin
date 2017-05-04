@@ -2,13 +2,6 @@
 import math
 
 
-def perlin(x, y):
-    xf, xi = math.modf(float(x))
-    yf, yi = math.modf(float(y))
-    print('xi:{0} xf:{1}, yi:{2} yf:{3}'.format(xi, xf, yi, yf))
-    return x + y
-
-
 def split_float(x):
     xf, xi = math.modf(float(x))
     return int(xi), xf
