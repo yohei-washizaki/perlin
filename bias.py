@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 
-import argparse
-import sys
-import util
-
-
 def proc(s, bias):
     xy = s.split(' ')
     x = float(xy[0]) * bias
@@ -12,11 +7,16 @@ def proc(s, bias):
     print('{0} {1}'.format(x, y))
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("size", type=int, help="size of a texture. power of 2")
-args = parser.parse_args()
+if __name__ == "__main__":
+    import argparse
+    import sys
+    import util
 
-grid_size = util.power_to_int(args.size)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("size", type=int, help="size of a texture. power of 2")
+    args = parser.parse_args()
 
-for line in sys.stdin:
-    proc(line.strip(), grid_size)
+    grid_size = util.power_to_int(args.size)
+
+    for line in sys.stdin:
+        proc(line.strip(), grid_size)
