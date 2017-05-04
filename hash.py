@@ -22,7 +22,7 @@ if __name__ == "__main__":
     for line in sys.stdin:
         s = line.strip()
         v = s.split(' ')
-        # print('{0[0]} {0[1]} {0[2]} {0[3]}'.format(v))
+
         xi = int(v[0])
         yi = int(v[1])
         aa = ht.hash(ht.hash(xi) + yi) & 0x7
