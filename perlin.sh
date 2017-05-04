@@ -9,4 +9,4 @@ RANDOM_TABLE=$(
     done | sed '$!s/$/ /' | tr -d '\n'
 	    )
 
-./uv.py $SIZE | ./scaler.py $SCALE | ./perlin.py | ./hash.py $RANDOM_TABLE
+./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py $RANDOM_TABLE
