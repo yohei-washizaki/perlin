@@ -3,7 +3,6 @@ import math
 
 
 def next_power_of_2(x):
-
     if x == 1:
         return 1
 
@@ -14,7 +13,6 @@ def next_power_of_2(x):
 
 
 def power_to_int(x):
-
     return int(math.pow(x, 2))
 
 
