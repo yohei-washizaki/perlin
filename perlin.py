@@ -5,8 +5,8 @@ import math
 
 
 def normalize_vector(x, y):
-    length = math.sqrt(x*x+y*y)
-    
+    length = math.sqrt(x * x + y * y)
+
     if math.isclose(length, 0):
         return (x, y)
     else:
@@ -15,7 +15,7 @@ def normalize_vector(x, y):
 
 
 def dot_vector(v1, v2):
-    return v1[0]*v2[0] + v1[1]*v2[1]
+    return v1[0] * v2[0] + v1[1] * v2[1]
 
 
 def create_unitvectors():
@@ -36,6 +36,7 @@ def create_unitvectors():
 
     return normalized
 
+
 def fade(t):
     return t * t * t * (t * (t * 6 - 15) + 10)
 
@@ -50,9 +51,9 @@ def perlin(aa, ab, ba, bb, x, y, unit_vectors):
     bav = unit_vectors[ba]
     bbv = unit_vectors[bb]
     aap = (x, y)
-    bap = (x-1, y)
-    abp = (x, y-1)
-    bbp = (x-1, y-1)
+    bap = (x - 1, y)
+    abp = (x, y - 1)
+    bbp = (x - 1, y - 1)
     return lerp(
         lerp(grad(aav, aap), grad(bav, bap), fade(x)),
         lerp(grad(abv, abp), grad(bbv, bbp), fade(x)),
@@ -71,7 +72,7 @@ if __name__ == "__main__":
     import sys
 
     unit_vectors = create_unitvectors()
-    
+
     for line in sys.stdin:
         params = line.strip().split(' ')
         aa = int(params[0])
@@ -80,6 +81,6 @@ if __name__ == "__main__":
         bb = int(params[3])
         x = float(params[4])
         y = float(params[5])
-        
+
         p = bind(perlin(aa, ab, ba, bb, x, y, unit_vectors))
         print('{0}'.format(p))

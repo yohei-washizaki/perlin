@@ -9,7 +9,7 @@ parser.add_argument("size", type=int, help="size of a texture. power of 2")
 parser.add_argument("-s", "--seed", type=int, help="random seed")
 args = parser.parse_args()
 
-#random.seed(args.seed)
+# random.seed(args.seed)
 
 uvs = []
 inv = 1.0 / args.size
