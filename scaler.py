@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def apply_scale(xy, scale):
     x = float(xy[0]) * scale
     y = float(xy[1]) * scale
