@@ -69,10 +69,10 @@ for OPT in "$@"; do
     esac
 done
 
-echo "size:   $SIZE"
-echo "scale:  $SCALE"
-echo "output: $OUTPUT"
-echo "seed:   $SEED"
+# echo "size:   $SIZE"
+# echo "scale:  $SCALE"
+# echo "output: $OUTPUT"
+# echo "seed:   $SEED"
 
 RANDOM_TABLE=$(
     for i in `seq 1 2`; do
