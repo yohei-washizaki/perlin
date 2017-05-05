@@ -10,7 +10,7 @@ $ ./perlin.sh foo.png
 $ ./perlin.sh --size 256 --random-seed 9999 foo.png
 
 # Specify frequency.
-$ ./perlin.sh --freq 8 foo.png
+$ ./perlin.sh --frequency 8 foo.png
 ```
 
 # Requirements
