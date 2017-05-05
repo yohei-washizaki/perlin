@@ -24,7 +24,6 @@ def lerp(a, b, t):
     return a + t * (b - a)
 
 
-
 def next_power_of_2(x):
     if x == 1:
         return 1

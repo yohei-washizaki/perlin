@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 
-import math
 import util
+
 
 def create_unitvectors():
     unnormalized = [
