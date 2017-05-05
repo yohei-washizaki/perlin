@@ -80,4 +80,4 @@ RANDOM_TABLE=$(
     done | sed '$!s/$/ /' | tr -d '\n'
 	    )
 
-./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py $RANDOM_TABLE | ./perlin.py | ./array2png.py $OUTPUT
+./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py $RANDOM_TABLE | ./perlin.py | ./array2image.py $OUTPUT
