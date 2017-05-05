@@ -13,7 +13,7 @@ usage(){
     echo "Options:"
     echo "-h, --help        : Show this message."
     echo "-v, --version     : Show version of this script."
-    echo "    --size        : Size of generated texture."
+    echo "-s, --size        : Size of generated texture."
     echo "-r, --random-seed : Set random seed. If not system clock is used."
     echo "-f, --frequency   : Set frequency."
     echo
@@ -46,7 +46,7 @@ for OPT in "$@"; do
 	    SEED=("-s $2")
 	    shift 2
 	    ;;
-	'--size' )
+	'-s'|'--size' )
 	    if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
 		echo "$PROGNAME: option requires an argument -- $1" 1>&2
 		exit 1
