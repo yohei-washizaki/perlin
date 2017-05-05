@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("hashtable", type=int, nargs='+', help="table values")
-    parser.add_argument("-p", "--perm", type= int, help="permination")
+    parser.add_argument("-p", "--perm", type=int, help="permination")
     args = parser.parse_args()
 
     ht = HashTable(args.hashtable)
@@ -28,15 +28,14 @@ if __name__ == "__main__":
         s = line.strip()
         if not s:
             break
-        
+
         v = s.split(' ')
-        
 
         xi = int(v[0]) % perm
         yi = int(v[1]) % perm
         xj = (int(v[0]) + 1) % perm
         yj = (int(v[1]) + 1) % perm
-        
+
         aa = ht.hash(ht.hash(xi) + yi)
         ab = ht.hash(ht.hash(xi) + yj)
         ba = ht.hash(ht.hash(xj) + yi)
