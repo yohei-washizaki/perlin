@@ -2,21 +2,7 @@
 
 
 import math
-
-
-def normalize_vector(x, y):
-    length = math.sqrt(x * x + y * y)
-
-    if math.isclose(length, 0):
-        return (x, y)
-    else:
-        inv = 1.0 / length
-        return (x * inv, y * inv)
-
-
-def dot_vector(v1, v2):
-    return v1[0] * v2[0] + v1[1] * v2[1]
-
+import util
 
 def create_unitvectors():
     unnormalized = [
@@ -31,18 +17,10 @@ def create_unitvectors():
     ]
     normalized = []
     for v in unnormalized:
-        n = normalize_vector(v[0], v[1])
+        n = util.normalize_vector(v[0], v[1])
         normalized.append(n)
 
     return normalized
-
-
-def fade(t):
-    return t * t * t * (t * (t * 6 - 15) + 10)
-
-
-def lerp(a, b, t):
-    return a + t * (b - a)
 
 
 def perlin(aa, ab, ba, bb, x, y, unit_vectors):
@@ -54,14 +32,14 @@ def perlin(aa, ab, ba, bb, x, y, unit_vectors):
     bap = (x - 1, y)
     abp = (x, y - 1)
     bbp = (x - 1, y - 1)
-    return lerp(
-        lerp(grad(aav, aap), grad(bav, bap), fade(x)),
-        lerp(grad(abv, abp), grad(bbv, bbp), fade(x)),
-        fade(y))
+    return util.lerp(
+        util.lerp(grad(aav, aap), grad(bav, bap), util.fade(x)),
+        util.lerp(grad(abv, abp), grad(bbv, bbp), util.fade(x)),
+        util.fade(y))
 
 
 def grad(grad_vector, position_vector):
-    return dot_vector(grad_vector, position_vector)
+    return util.dot_vector(grad_vector, position_vector)
 
 
 def bind(v):

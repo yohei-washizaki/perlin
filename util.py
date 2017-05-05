@@ -2,6 +2,29 @@
 import math
 
 
+def normalize_vector(x, y):
+    length = math.sqrt(x * x + y * y)
+
+    if math.isclose(length, 0):
+        return (x, y)
+    else:
+        inv = 1.0 / length
+        return (x * inv, y * inv)
+
+
+def dot_vector(v1, v2):
+    return v1[0] * v2[0] + v1[1] * v2[1]
+
+
+def fade(t):
+    return t * t * t * (t * (t * 6 - 15) + 10)
+
+
+def lerp(a, b, t):
+    return a + t * (b - a)
+
+
+
 def next_power_of_2(x):
     if x == 1:
         return 1
