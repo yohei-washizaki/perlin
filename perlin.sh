@@ -3,7 +3,7 @@
 PROGNAME=$(basename $0)
 VERSION="1.0"
 SIZE=256
-SCALE=2
+FREQ=8
 SEED=""
 
 usage(){
@@ -14,8 +14,8 @@ usage(){
     echo "-h, --help        : Show this message."
     echo "-v, --version     : Show version of this script."
     echo "    --size        : Size of generated texture."
-    echo "    --scale       : Scale factor for uv coord extension."
     echo "-r, --random-seed : Set random seed. If not system clock is used."
+    echo "-f, --frequency   : Set frequency."
     echo
     exit 1
 }
@@ -30,12 +30,12 @@ for OPT in "$@"; do
 	    echo $VERSION
 	    exit 1
 	    ;;
-	'--scale' )
+	'-f'|'--frequency' )
 	    if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
 		echo "$PROGNAME: option requires an argument -- $1" 1>&2
 		exit 1
 	    fi
-	    SCALE="$2"
+	    FREQ="$2"
 	    shift 2
 	    ;;
 	'-r'|'--random-seed' )
@@ -59,6 +59,10 @@ for OPT in "$@"; do
 	    OUTPUT+=( "$@" )
 	    break
 	    ;;
+	-*)
+	    echo "$PROGNAME: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
+	    exit 1
+	    ;;
 	*)
 	    if [[ ! -z "$1" ]] && [[ ! "$1" =~ ^-+ ]]; then
 		OUTPUT+=( "$1" )
@@ -68,16 +72,11 @@ for OPT in "$@"; do
     esac
 done
 
-# echo "size:   $SIZE"
-# echo "scale:  $SCALE"
-# echo "output: $OUTPUT"
-# echo "seed:   $SEED"
-
 RANDOM_TABLE=$(
     for i in `seq 1 2`; do
 	./genrndtbl.py $SIZE $SEED
     done | sed '$!s/$/ /' | tr -d '\n'
 	    )
 
-./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py -p $SCALE $RANDOM_TABLE | ./perlin.py | ./array2image.py $OUTPUT
-#./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py -p $SCALE $RANDOM_TABLE
+./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./perlin.py | ./array2image.py $OUTPUT
+
