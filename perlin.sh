@@ -15,11 +15,11 @@ usage(){
     echo "Generates perline noise texture."
     echo
     echo "options:"
-    echo "-h, --help        : Show this message."
-    echo "-v, --version     : Show version of this script."
-    echo "-s, --size        : Size of generated texture."
-    echo "-f, --frequency   : Set frequency."
-    echo "-r, --random-seed : Set random seed. If not system clock is used."
+    echo "-h, --help        : show this help and exit."
+    echo "-v, --version     : show version info and exit."
+    echo "-s, --size        : specify size of generated texture."
+    echo "-f, --frequency   : specify frequency."
+    echo "-r, --random-seed : specify random seed. If not None is given."
     echo
     exit 1
 }
