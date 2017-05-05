@@ -1,7 +1,7 @@
 # perlin
 Generates perlin noise textrue.
 
-# Getting started
+# How to use
 
 ```sh
 $ ./perlin.sh foo.png
