@@ -6,7 +6,7 @@ def normalize_vector(x, y):
     length = math.sqrt(x * x + y * y)
 
     if math.isclose(length, 0):
-        return (x, y)
+        return (0, 0)
     else:
         inv = 1.0 / length
         return (x * inv, y * inv)
