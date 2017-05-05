@@ -7,15 +7,19 @@ FREQ=8
 SEED=""
 
 usage(){
-    echo "Usage: $PROGNAME [-h | --help] [-v | --version] [--size] [--scale] [-r | --random-seed] FILENAME"
+    echo "usage: $PROGNAME [-h | --help] [-v | --version]"
+    echo "                 [-s | --size] [-f | --frequency]"
+    echo "                 [-r | --random-seed]"
+    echo "                 FILENAME"
+    echo
     echo "Generates perline noise texture."
     echo
-    echo "Options:"
+    echo "options:"
     echo "-h, --help        : Show this message."
     echo "-v, --version     : Show version of this script."
     echo "-s, --size        : Size of generated texture."
-    echo "-r, --random-seed : Set random seed. If not system clock is used."
     echo "-f, --frequency   : Set frequency."
+    echo "-r, --random-seed : Set random seed. If not system clock is used."
     echo
     exit 1
 }
@@ -71,6 +75,11 @@ for OPT in "$@"; do
 	    ;;
     esac
 done
+
+if [ -z $OUTPUT ]; then
+    usage
+    exit 1
+fi
 
 RANDOM_TABLE=$(
     for i in `seq 1 2`; do
