@@ -29,8 +29,8 @@ def perlin(aa, ab, ba, bb, x, y, unit_vectors):
     bav = unit_vectors[ba]
     bbv = unit_vectors[bb]
     aap = (x, y)
-    bap = (x - 1, y)
     abp = (x, y - 1)
+    bap = (x - 1, y)
     bbp = (x - 1, y - 1)
     return util.lerp(
         util.lerp(grad(aav, aap), grad(bav, bap), util.fade(x)),
@@ -53,10 +53,10 @@ if __name__ == "__main__":
 
     for line in sys.stdin:
         params = line.strip().split(' ')
-        aa = int(params[0])
-        ab = int(params[1])
-        ba = int(params[2])
-        bb = int(params[3])
+        aa = int(params[0]) & 0x7
+        ab = int(params[1]) & 0x7
+        ba = int(params[2]) & 0x7
+        bb = int(params[3]) & 0x7
         x = float(params[4])
         y = float(params[5])
 

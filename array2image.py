@@ -34,6 +34,9 @@ if __name__ == "__main__":
         for x in range(sz[1]):
             index = x + sz[0] * y
             c = int(colors[index] * 255)
-            img.paste(c, (x, y, x + 1, y + 1))
+
+            xb = x
+            yb = sz[0] - y - 1
+            img.paste(c, (xb, yb, xb + 1, yb + 1))
 
     img.save(args.output)

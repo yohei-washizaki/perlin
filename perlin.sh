@@ -21,7 +21,6 @@ usage(){
 }
 
 for OPT in "$@"; do
-    echo "$@"
     case "$OPT" in
 	'-h'|'--help' )
 	    usage
@@ -80,4 +79,5 @@ RANDOM_TABLE=$(
     done | sed '$!s/$/ /' | tr -d '\n'
 	    )
 
-./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py $RANDOM_TABLE | ./perlin.py | ./array2image.py $OUTPUT
+./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py -p $SCALE $RANDOM_TABLE | ./perlin.py | ./array2image.py $OUTPUT
+#./uv.py $SIZE | ./scaler.py $SCALE | ./splitfloat.py | ./hash.py -p $SCALE $RANDOM_TABLE

@@ -21,4 +21,4 @@ if __name__ == "__main__":
     for line in sys.stdin:
         s = line.strip()
         xy = s.split(' ')
-        apply_scale(xy, grid_size)
+        apply_scale(xy, args.scale)
