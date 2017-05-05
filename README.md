@@ -13,4 +13,4 @@ $ perlin.sh --size 256 --random-seed 9999 foo.png
 
 # Requirements
 - Python3
- - Pillow
+- Pillow `pip3 install pillow`
