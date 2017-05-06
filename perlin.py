@@ -21,6 +21,16 @@ def create_unitvectors():
     return normalized
 
 
+def parse_vectors(vectors):
+    v = []
+
+    count = int(len(vectors) / 2)
+    for i in range(count):
+        v.append((vectors[i * 2], vectors[(i * 2) + 1]))
+
+    return v
+
+
 def perlin(aa, ab, ba, bb, x, y, unit_vectors):
     aav = unit_vectors[aa]
     abv = unit_vectors[ab]
@@ -46,8 +56,18 @@ def bind(v):
 
 if __name__ == "__main__":
     import sys
+    import argparse
 
-    unit_vectors = create_unitvectors()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-u", "--unitvectors",
+                        type=float, nargs='+',
+                        help="whitespace separated unit vectors list")
+    args = parser.parse_args()
+
+    if args.unitvectors:
+        unit_vectors = parse_vectors(args.unitvectors)
+    else:
+        unit_vectors = create_unitvectors()
 
     for line in sys.stdin:
         params = line.strip().split(' ')

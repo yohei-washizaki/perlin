@@ -6,6 +6,7 @@ SIZE=256
 FREQ=8
 SEED=""
 
+
 usage(){
     echo "usage: $PROGNAME [-h | --help] [-v | --version]"
     echo "                 [-s | --size] [-f | --frequency]"
@@ -23,6 +24,7 @@ usage(){
     echo
     exit 1
 }
+
 
 for OPT in "$@"; do
     case "$OPT" in
@@ -87,5 +89,10 @@ RANDOM_TABLE=$(
     done | sed '$!s/$/ /' | tr -d '\n'
 	    )
 
-./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./perlin.py | ./array2image.py $OUTPUT
+# 1.0 0 0.7 0.7 0 1.0 ...
+# means
+# (1.0 0) (0.7 0.7) (0 1.0) ...
+UNIT_VEC=$( ./unitvec.py 8 | sed '$!s/$/ /' | tr -d '\n' )
+
+./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./perlin.py -u $UNIT_VEC | ./array2image.py $OUTPUT
 
