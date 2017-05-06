@@ -94,5 +94,5 @@ RANDOM_TABLE=$(
 # (1.0 0) (0.7 0.7) (0 1.0) ...
 UNIT_VEC=$( ./unitvec.py 8 | sed '$!s/$/ /' | tr -d '\n' )
 
-./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./perlin.py -u $UNIT_VEC | ./array2image.py $OUTPUT
+./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./perlin.py $UNIT_VEC -- | ./array2image.py $OUTPUT
 

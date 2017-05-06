@@ -2,25 +2,6 @@
 import util
 
 
-def create_unitvectors():
-    unnormalized = [
-        (1, 0),
-        (1, 1),
-        (0, 1),
-        (-1, 1),
-        (-1, 0),
-        (-1, -1),
-        (0, -1),
-        (1, -1),
-    ]
-    normalized = []
-    for v in unnormalized:
-        n = util.normalize_vector(v[0], v[1])
-        normalized.append(n)
-
-    return normalized
-
-
 def parse_vectors(vectors):
     v = []
 
@@ -59,15 +40,12 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-u", "--unitvectors",
+    parser.add_argument("unitvectors",
                         type=float, nargs='+',
                         help="whitespace separated unit vectors list")
     args = parser.parse_args()
 
-    if args.unitvectors:
-        unit_vectors = parse_vectors(args.unitvectors)
-    else:
-        unit_vectors = create_unitvectors()
+    unit_vectors = parse_vectors(args.unitvectors)
 
     for line in sys.stdin:
         params = line.strip().split(' ')
