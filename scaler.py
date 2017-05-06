@@ -10,13 +10,10 @@ def apply_scale(xy, scale):
 if __name__ == "__main__":
     import argparse
     import sys
-    import util
 
     parser = argparse.ArgumentParser()
     parser.add_argument("scale", type=int, help="Scale to apply")
     args = parser.parse_args()
-
-    grid_size = util.power_to_int(args.scale)
 
     for line in sys.stdin:
         s = line.strip()
