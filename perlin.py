@@ -16,21 +16,21 @@ def bind(v, min_value, max_value):
 
 class PerlinNoise:
     """Generate perlin noise"""
+
     def generate(self, x, y, freq, hash_table, unit_vectors):
         xi, xf = splitfloat.split_float(x)
         yi, yf = splitfloat.split_float(y)
-
 
         xim = xi % freq
         xjm = (xi + 1) % freq
         yim = yi % freq
         yjm = (yi + 1) % freq
 
-        aa = hash_table.hash(hash_table.hash(xim) + yim) 
+        aa = hash_table.hash(hash_table.hash(xim) + yim)
         ab = hash_table.hash(hash_table.hash(xim) + yjm)
         ba = hash_table.hash(hash_table.hash(xjm) + yim)
         bb = hash_table.hash(hash_table.hash(xjm) + yjm)
-        
+
         aav = unit_vectors[aa]
         abv = unit_vectors[ab]
         bav = unit_vectors[ba]
