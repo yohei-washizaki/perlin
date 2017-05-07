@@ -2,11 +2,23 @@
 import math
 
 
-def create_unitvectors(n):
-    step = 360.0 / n
-    for i in range(n):
-        radian = math.radians(i * step)
-        print('{0:.16f} {1:.16f}'.format(math.cos(radian), math.sin(radian)))
+class UnitVectors:
+    """List of unit vectors"""
+    def __init__(self, vectors):
+        self.vectors = vectors
+
+    def __getitem__(self, k):
+        return self.vectors[k % len(self.vectors)]
+
+    @staticmethod
+    def Create(count=8):
+        step = 360.0 / count
+        unit_vectors = []
+        for i in range(count):
+            radian = math.radians(i * step)
+            unit_vectors.append((math.cos(radian), math.sin(radian)))
+
+        return UnitVectors(unit_vectors)
 
 
 if __name__ == "__main__":
@@ -16,4 +28,7 @@ if __name__ == "__main__":
     parser.add_argument("count", type=int, help="count of created vectors.")
     args = parser.parse_args()
 
-    create_unitvectors(args.count)
+    unit_vectors = UnitVectors.Create()
+
+    for v in unit_vectors:
+        print('{0[0]:.16f} {0[1]:.16f}'.format(v))

@@ -83,16 +83,3 @@ if [ -z $OUTPUT ]; then
     exit 1
 fi
 
-RANDOM_TABLE=$(
-    for i in `seq 1 2`; do
-	./genrndtbl.py $SIZE $SEED
-    done | sed '$!s/$/ /' | tr -d '\n'
-	    )
-
-# 1.0 0 0.7 0.7 0 1.0 ...
-# means
-# (1.0 0) (0.7 0.7) (0 1.0) ...
-UNIT_VEC=$( ./unitvec.py 8 | sed '$!s/$/ /' | tr -d '\n' )
-
-./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./octave_perlin.py $UNIT_VEC -- | ./array2image.py $OUTPUT
-

@@ -1,16 +1,27 @@
 #!/usr/bin/env python3
 
+
+def gen_uv(width, height):
+    w_inv = 1.0 / width
+    h_inv = 1.0 / height
+    uv = []
+    for h in range(height):
+        for w in range(width):
+            u = (w + 0.5) * w_inv
+            v = (h + 0.5) * h_inv
+            uv.append((u, v))
+
+    return uv
+
+
 if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
     parser.add_argument("size", type=int, help="size of a texture. power of 2")
-    parser.add_argument("-s", "--seed", type=int, help="random seed")
     args = parser.parse_args()
 
-    inv = 1.0 / args.size
-    for h in range(args.size):
-        for w in range(args.size):
-            u = (w + 0.5) * inv
-            v = (h + 0.5) * inv
-            print('{0} {1}'.format(u, v))
+    uvs = gen_uv(args.size, args.size)
+
+    for uv in uvs:
+        print('{0[0]} {0[1]}'.format(uv))

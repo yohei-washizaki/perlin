@@ -49,7 +49,7 @@ for OPT in "$@"; do
 		echo "$PROGNAME: option requires an argument -- $1" 1>&2
 		exit 1
 	    fi
-	    SEED=("-s $2")
+	    SEED=("-r $2")
 	    shift 2
 	    ;;
 	'-s'|'--size' )
@@ -83,16 +83,4 @@ if [ -z $OUTPUT ]; then
     exit 1
 fi
 
-RANDOM_TABLE=$(
-    for i in `seq 1 2`; do
-	./genrndtbl.py $SIZE $SEED
-    done | sed '$!s/$/ /' | tr -d '\n'
-	    )
-
-# 1.0 0 0.7 0.7 0 1.0 ...
-# means
-# (1.0 0) (0.7 0.7) (0 1.0) ...
-UNIT_VEC=$( ./unitvec.py 8 | sed '$!s/$/ /' | tr -d '\n' )
-
-./uv.py $SIZE | ./scaler.py $FREQ | ./splitfloat.py | ./hash.py -p $FREQ $RANDOM_TABLE | ./perlin.py $UNIT_VEC -- | ./array2image.py $OUTPUT
-
+./uv.py $SIZE | ./scaler.py $FREQ | ./perlin.py $FREQ | ./array2image.py $OUTPUT
