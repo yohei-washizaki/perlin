@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PROGNAME=$(basename $0)
-VERSION="1.0"
+VERSION="1.2.1"
 SIZE=256
 FREQ=8
 SEED=""
