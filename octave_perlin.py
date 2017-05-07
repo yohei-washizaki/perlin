@@ -1,30 +1,7 @@
 #!/usr/bin/env python3
-import util
-from perlin import Perlin
-from perlin import UnitVectors
-from perlin import grad
-from perlin import bind
-
-
-class OctaveNoise(Perlin):
-    """Octave perlin noise"""
-
-    def generate_noise(self, aa, ab, ba, bb, x, y, unit_vectors):
-        aav = unit_vectors[aa]
-        abv = unit_vectors[ab]
-        bav = unit_vectors[ba]
-        bbv = unit_vectors[bb]
-        aap = (x, y)
-        abp = (x, y - 1)
-        bap = (x - 1, y)
-        bbp = (x - 1, y - 1)
-
-        noise = util.lerp(
-            util.lerp(grad(aav, aap), grad(bav, bap), util.fade(x)),
-            util.lerp(grad(abv, abp), grad(bbv, bbp), util.fade(x)),
-            util.fade(y))
-
-        return noise
+from perlin import PerlinNoise
+from unitvec import UnitVectors
+from hash import HashTable
 
 
 if __name__ == "__main__":
@@ -32,25 +9,50 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("unitvectors",
-                        type=float, nargs='+',
-                        help="whitespace separated unit vectors list")
+    parser.add_argument("frequency",
+                        type=int, help="frequency")
+    parser.add_argument("-n", "--num_vectors",
+                        type=int, default=8,
+                        help="number of vectors generated")
+    parser.add_argument("-l", "--hashtable_length",
+                        type=int, default=256,
+                        help="specify length of hash table")
+    parser.add_argument("-r", "--random_seed",
+                        type=int,
+                        help="specify random seed")
     parser.add_argument("-o", "--octaves",
                         type=int, default=8,
                         help="octaves")
+    parser.add_argument("-p", "--persistence",
+                        type=float, default=1.0,
+                        help="persistence")
     args = parser.parse_args()
 
-    unit_vectors = UnitVectors(args.unitvectors)
-    noise_generator = OctaveNoise()
+    unit_vectors = UnitVectors.Create(args.num_vectors)
+    hash_table = HashTable.Create(args.hashtable_length, args.random_seed)
+    perlin_noise = PerlinNoise()
+    default_freq = args.frequency
+    octaves = args.octaves
+    persistence = args.persistence
 
     for line in sys.stdin:
         params = line.strip().split(' ')
-        aa = int(params[0])
-        ab = int(params[1])
-        ba = int(params[2])
-        bb = int(params[3])
-        x = float(params[4])
-        y = float(params[5])
+        x = float(params[0])
+        y = float(params[1])
 
-        p = noise_generator.generate_noise(aa, ab, ba, bb, x, y, unit_vectors)
-        print('{0}'.format(p))
+        amplitude = 1.0
+        total = 0
+        max_value = 0
+        frequency = default_freq
+
+        for o in range(octaves):
+            total += perlin_noise.generate(x * frequency,
+                                           y * frequency,
+                                           frequency, hash_table, unit_vectors)
+            max_value += amplitude
+            amplitude *= persistence
+            frequency *= 2
+
+        final_value = total / max_value
+
+        print('{0}'.format(final_value))

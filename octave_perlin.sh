@@ -3,7 +3,8 @@
 PROGNAME=$(basename $0)
 VERSION="1.0"
 SIZE=256
-FREQ=8
+FREQ=1
+OCTAVES=8
 SEED=""
 
 
@@ -49,7 +50,15 @@ for OPT in "$@"; do
 		echo "$PROGNAME: option requires an argument -- $1" 1>&2
 		exit 1
 	    fi
-	    SEED=("-s $2")
+	    SEED=("-r $2")
+	    shift 2
+	    ;;
+	'-o'|'--octaves' )
+	    if [[ -z "$2" ]] || [[ "$2" =~ ^-+ ]]; then
+		echo "$PROGNAME: option requires an argument -- $1" 1>&2
+		exit 1
+	    fi
+	    OCTAVES=("$2")
 	    shift 2
 	    ;;
 	'-s'|'--size' )
@@ -83,3 +92,4 @@ if [ -z $OUTPUT ]; then
     exit 1
 fi
 
+./uv.py $SIZE | ./octave_perlin.py $FREQ $SEED -o $OCTAVES | ./array2image.py $OUTPUT

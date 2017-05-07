@@ -54,23 +54,25 @@ if __name__ == "__main__":
     import unitvec
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("frequency",
+                        type=int, help="frequency")
     parser.add_argument("-n", "--num_vectors",
                         type=int, default=8,
                         help="number of vectors generated")
-    parser.add_argument("frequency",
-                        type=int, help="frequency")
+    parser.add_argument("-l", "--hashtable_length",
+                        type=int, default=256,
+                        help="specify length of hash table")
+    parser.add_argument("-r", "--random_seed",
+                        type=int,
+                        help="specify random seed")
     args = parser.parse_args()
 
     unit_vectors = unitvec.UnitVectors.Create(args.num_vectors)
-    hash_table = hash.HashTable.Create(256)
+    hash_table = hash.HashTable.Create(args.hashtable_length, args.random_seed)
     perlin_noise = PerlinNoise()
     freq = args.frequency
     for line in sys.stdin:
         params = line.strip().split(' ')
-        # aa = int(params[0])
-        # ab = int(params[1])
-        # ba = int(params[2])
-        # bb = int(params[3])
         x = float(params[0])
         y = float(params[1])
 
