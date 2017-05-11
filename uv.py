@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
 
-def gen_uv(width, height):
+def gen_uv(width, height, scale=1.0):
     w_inv = 1.0 / width
     h_inv = 1.0 / height
     uv = []
     for h in range(height):
         for w in range(width):
-            u = (w + 0.5) * w_inv
-            v = (h + 0.5) * h_inv
+            u = (w + 0.5) * w_inv * scale
+            v = (h + 0.5) * h_inv * scale
             uv.append((u, v))
 
     return uv
